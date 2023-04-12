@@ -1,4 +1,6 @@
 using System;
+using System.Runtime.CompilerServices;
+using _Root.Scripts.Signals;
 using UnityEngine;
 
 namespace _Root.Scripts.Controllers
@@ -6,26 +8,56 @@ namespace _Root.Scripts.Controllers
     public class PlayerMovementController : MonoBehaviour
     {
         [SerializeField] private float movementSpeed, jumpForce; //5-10
+        [SerializeField] private Transform mesh;
 
         private Rigidbody2D _rb;
         private bool _onAir;
 
         private void Awake()
         {
-            _rb = GetComponent<Rigidbody2D>();
+            _rb = transform.root.GetComponent<Rigidbody2D>();
         }
+
+        #region Subscriptions
+
+        private void OnEnable()
+        {
+            Subscribe();
+        }
+
+        private void OnDisable()
+        {
+            UnSubscribe();
+        }
+
+        private void Subscribe()
+        {
+            MovementSignals.Instance.OnAir += AirStatus;
+        }
+
+        private void UnSubscribe()
+        {
+            MovementSignals.Instance.OnAir -= AirStatus;
+        }
+        #endregion
 
         private void Move()
         {
             if (Input.GetKey(KeyCode.A))
             {
+                var rotation = mesh.rotation;
+                
                 _rb.velocity = new Vector2(-movementSpeed, _rb.velocity.y);
-                transform.rotation=Quaternion.Euler(new Vector3(transform.rotation.x,0,transform.rotation.z));
+                rotation=Quaternion.Euler(new Vector3(rotation.x,0,rotation.z));
+                mesh.rotation = rotation;
             }
             if (Input.GetKey(KeyCode.D))
             {
+                var rotation = mesh.rotation;
+                
                 _rb.velocity = new Vector2(movementSpeed, _rb.velocity.y);
-                transform.rotation=Quaternion.Euler(new Vector3(transform.rotation.x,180,transform.rotation.z));
+                rotation=Quaternion.Euler(new Vector3(rotation.x,180,rotation.z));
+                mesh.rotation = rotation;
             }
             if (Input.GetKeyDown(KeyCode.W))
             {
@@ -33,7 +65,17 @@ namespace _Root.Scripts.Controllers
                     return;
                 _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
             }
-   
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                if(!_onAir)
+                    return;
+                _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
+            }
+        }   
+
+        private void AirStatus(bool onAir)
+        {
+            _onAir = onAir;
         }
 
         private void Update()
