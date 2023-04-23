@@ -1,5 +1,3 @@
-using System;
-using System.Runtime.CompilerServices;
 using _Root.Scripts.Signals;
 using UnityEngine;
 
@@ -43,7 +41,7 @@ namespace _Root.Scripts.Controllers
 
         private void Move()
         {
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 var rotation = mesh.rotation;
                 
@@ -51,7 +49,7 @@ namespace _Root.Scripts.Controllers
                 rotation=Quaternion.Euler(new Vector3(rotation.x,0,rotation.z));
                 mesh.rotation = rotation;
             }
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
                 var rotation = mesh.rotation;
                 
@@ -59,15 +57,9 @@ namespace _Root.Scripts.Controllers
                 rotation=Quaternion.Euler(new Vector3(rotation.x,180,rotation.z));
                 mesh.rotation = rotation;
             }
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space))
             {
                 if(_onAir)
-                    return;
-                _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                if(!_onAir)
                     return;
                 _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
             }
