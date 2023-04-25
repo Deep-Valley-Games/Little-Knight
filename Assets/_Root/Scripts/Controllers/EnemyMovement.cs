@@ -1,6 +1,4 @@
-using System;
 using _Root.Scripts.ScriptableObjects;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _Root.Scripts.Controllers
@@ -12,8 +10,16 @@ namespace _Root.Scripts.Controllers
         private float _movementSpeed;
         private float _stoppingDistance;
         private Transform _target;
-        private bool _onTarget;
-    
+        private bool _onRange;
+        private bool _onChase;
+
+        public void StartChase()
+        {
+            if(_onChase)
+                return;
+            
+            _onChase = true;
+        }
         private void Awake()
         {
             _enemyController = GetComponent<EnemyController>();
@@ -35,24 +41,25 @@ namespace _Root.Scripts.Controllers
 
         private void MoveToTarget()
         {
-            _onTarget = Vector2.Distance(transform.position, _target.position) <= _stoppingDistance;
-            if(_onTarget)
+            _onRange = Vector2.Distance(transform.position, _target.position) <= _stoppingDistance;
+            if(_onRange)
                 return;
-            if (_target)
+            
+            if (_onChase)
             {
-                // transform.position = Vector2.Lerp(transform.position,
-                //     new Vector2(_target.position.x, transform.position.y),
-                //     _movementSpeed * Time.deltaTime);
-
+                if(!_target)
+                    return;
+                
                 var direction = Mathf.Sign(_target.position.x - transform.position.x);
                 var lookRotation = 0;
+                
                 if (direction<0)
                 {
                     lookRotation = -180;
                 }
+
                 transform.rotation = Quaternion.Euler(transform.rotation.x, lookRotation, 0);
-                transform.Translate(_movementSpeed * Time.deltaTime,
-                    0, 0);
+                transform.Translate(_movementSpeed * Time.deltaTime, 0, 0);
             }
         }
     }

@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 528030974500717164}
   - component: {fileID: 528030974500717161}
   - component: {fileID: 9062585778916598091}
-  m_Layer: 0
+  - component: {fileID: 3173535053223438238}
+  m_Layer: 7
   m_Name: 'Player '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,6 +72,22 @@ MonoBehaviour:
   movementSpeed: 10
   jumpForce: 35
   mesh: {fileID: 528030975113584273}
+--- !u!114 &3173535053223438238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528030974500717166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b17b61f8a78d437e81b6e1f2d540a6c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scanRadius: 12
+  scanLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &528030974601108216
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 528030974601108215}
   - component: {fileID: 528030974601108214}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: night_mainww
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +183,7 @@ GameObject:
   - component: {fileID: 528030974835148458}
   - component: {fileID: 528030974835148457}
   - component: {fileID: 528030974835148454}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Physics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 528030975113584273}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

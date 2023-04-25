@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3774914858119467946}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3774914858354074544}
   - component: {fileID: 3774914858354074547}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Physics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 3774914858779390259}
   - component: {fileID: 3774914858779390260}
   - component: {fileID: 3774914858779390261}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3774914859490602078}
   - component: {fileID: 3774914859490602065}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite-0003-export
   m_TagString: Untagged
   m_Icon: {fileID: 0}
