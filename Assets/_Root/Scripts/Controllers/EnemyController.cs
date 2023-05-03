@@ -10,10 +10,14 @@ namespace _Root.Scripts.Controllers
         [SerializeField] private EnemyData enemyData;
 
         private EnemyMovement _enemyMovement;
+        private EnemyCombatController _combatController;
+        private float _health;
 
         private void Awake()
         {
+            _combatController = GetComponent<EnemyCombatController>();
             _enemyMovement = GetComponent<EnemyMovement>();
+            _health = enemyData.health;
         }
 
 
@@ -22,7 +26,22 @@ namespace _Root.Scripts.Controllers
 
         public void TakeDamage(int damage)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("hit");
+            _health -= damage;
+            _health = Mathf.Clamp(_health, 0, 1000);
+
+            var isDead = _health <= 0;
+            
+            if (isDead)
+            {
+                _combatController.Die();
+                _enemyMovement.enabled = false;
+                this.enabled = false;
+            }
+            else
+            {
+                _combatController.TakeDamage();
+            }
         }
 
         public void StartChase()
