@@ -8,8 +8,12 @@ namespace _Root.Scripts.Controllers
         [SerializeField] private float movementSpeed, jumpForce; //5-10
         [SerializeField] private Transform mesh;
 
+        [SerializeField] private Animator animator;
+
         private Rigidbody2D _rb;
         private bool _onAir;
+        private static readonly int İsWalking = Animator.StringToHash("isWalking");
+        private static readonly int WalkingSpeed = Animator.StringToHash("WalkingSpeed");
 
         private void Awake()
         {
@@ -41,6 +45,7 @@ namespace _Root.Scripts.Controllers
 
         private void Move()
         {
+            PlayWalkingAnimation();
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 var rotation = mesh.rotation;
@@ -63,7 +68,15 @@ namespace _Root.Scripts.Controllers
                     return;
                 _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
             }
-        }   
+      
+        }
+
+        private void PlayWalkingAnimation()
+        {
+            var velocity = _rb.velocity.magnitude;
+            animator.SetFloat(WalkingSpeed,velocity);
+            Debug.Log(velocity);
+        }
 
         private void AirStatus(bool onAir)
         {

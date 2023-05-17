@@ -11,10 +11,13 @@ namespace _Root.Scripts.Controllers
         [SerializeField] private float attackRange;
         [SerializeField] private LayerMask enemyLayers;
         [SerializeField] private float attackCooldown = 2;
+        [SerializeField] private Animator animator;
         
         private float _attackTime;
         private Collider2D[] _enemyColliders = new Collider2D[10];
-        
+        private static readonly int Attack1 = Animator.StringToHash("Attack");
+
+
         private void Update()
         {
             CheckInput();
@@ -41,7 +44,7 @@ namespace _Root.Scripts.Controllers
 
         private void PlayAttackAnimation()
         {
-            
+            animator.SetTrigger(Attack1);
         }
 
         private void GiveDamage(Collider2D[] enemyColliders)
