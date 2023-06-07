@@ -75,7 +75,6 @@ namespace _Root.Scripts.Controllers
         {
             var velocity = _rb.velocity.magnitude;
             animator.SetFloat(WalkingSpeed,velocity);
-            Debug.Log(velocity);
         }
 
         private void AirStatus(bool onAir)

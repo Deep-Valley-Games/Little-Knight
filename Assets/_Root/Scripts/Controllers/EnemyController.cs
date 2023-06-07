@@ -26,7 +26,6 @@ namespace _Root.Scripts.Controllers
 
         public void TakeDamage(int damage)
         {
-            Debug.Log("hit");
             _health -= damage;
             _health = Mathf.Clamp(_health, 0, 1000);
 

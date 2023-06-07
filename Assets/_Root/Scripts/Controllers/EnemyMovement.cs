@@ -10,7 +10,6 @@ namespace _Root.Scripts.Controllers
         private float _movementSpeed;
         private float _stoppingDistance;
         private Transform _target;
-        private bool _onRange;
         private bool _onChase;
 
         public void StartChase()
@@ -39,10 +38,14 @@ namespace _Root.Scripts.Controllers
             MoveToTarget();
         }
 
+        private void StartCombat()
+        {
+            
+        }
         private void MoveToTarget()
         {
-            _onRange = Vector2.Distance(transform.position, _target.position) <= _stoppingDistance;
-            if(_onRange)
+           var onRange = Vector2.Distance(transform.position, _target.position) <= _stoppingDistance;
+            if(onRange)
                 return;
             
             if (_onChase)
